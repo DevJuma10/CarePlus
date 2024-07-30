@@ -25,9 +25,7 @@ export default function RootLayout({
       <body className={cn('min-h-screen bg-dark-300 font-sans antialiased', fontSans.variable)}>
       <ThemeProvider
             attribute="class"
-            defaultTheme="dark"
-            enableSystem
-            disableTransitionOnChange
+            defaultTheme="dark" 
           >
             {children}
       </ThemeProvider>
