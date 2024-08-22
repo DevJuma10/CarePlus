@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button"
 import logo from '../public/assets/icons/logo-full.svg'
 import onboardingImage from '../public/assets/images/onboarding-img.png'
-import { PatientForm } from "@/components/forms/patientForm";
+import { PatientForm } from "@/components/forms/PatientForm";
 
 
 export default function Home() {
@@ -39,6 +39,7 @@ export default function Home() {
           src={onboardingImage}
           height={1000}
           width={1000}
+          priority={true}
           alt="doctor-onboading-image"
           className="side-img max-w-[50%]"
 
