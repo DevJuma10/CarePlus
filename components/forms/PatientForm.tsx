@@ -12,6 +12,7 @@ import { SubmitButton } from "../ui/SubmitButton"
 // ASSETS IMPORTS
 import userIcon from '../../public/assets/icons/user.svg'
 import emailIcon from '../../public/assets/icons/email.svg'
+import { UserFormValidation } from "@/lib/validation"
 
 
 export enum FormFieldType { 
@@ -24,11 +25,6 @@ export enum FormFieldType {
   SKELETON='skeleton'
 }
 
-const formSchema = z.object({
-  username: z.string().min(2, {
-    message: "Username must be at least 2 characters.",
-  }),
-})
 
 export function PatientForm() {
 
@@ -37,15 +33,17 @@ export function PatientForm() {
 
 
   // 1. Define your form.
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<z.infer<typeof UserFormValidation>>({
+    resolver: zodResolver(UserFormValidation),
     defaultValues: {
-      username: "",
+      name: "",
+      email:"",
+      phone:""
     },
   })
 
   // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  function onSubmit(values: z.infer<typeof UserFormValidation>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
     console.log(values)
