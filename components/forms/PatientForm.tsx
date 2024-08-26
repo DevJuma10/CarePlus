@@ -7,7 +7,10 @@ import { Button } from "@/components/ui/button"
 import { Form } from "@/components/ui/form"
 import CustomFormField from '../ui/CustomFormField'
 
-export enum FormFieldType {
+// ASSETS IMPORTS
+import userIcon from '../../public/assets/icons/user.svg'
+
+export enum FormFieldType { 
   INPUT='input',
   TEXTAREA='textarea',
   PHONE_INPUT='phoneInput',
@@ -54,7 +57,7 @@ export function PatientForm() {
           name=   {"name"}
           label=  {'Full Name'}
           placeHolder=    {'John Doe'}
-          iconSrc= {'/../public/assets/icons/user.svg'}
+          iconSrc= {userIcon}
           iconAlt={'user'}
   
         />
