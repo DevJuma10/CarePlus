@@ -9,6 +9,7 @@ import CustomFormField from '../ui/CustomFormField'
 
 // ASSETS IMPORTS
 import userIcon from '../../public/assets/icons/user.svg'
+import emailIcon from '../../public/assets/icons/email.svg'
 
 export enum FormFieldType { 
   INPUT='input',
@@ -57,6 +58,28 @@ export function PatientForm() {
           name=   {"name"}
           label=  {'Full Name'}
           placeHolder=    {'John Doe'}
+          iconSrc= {userIcon}
+          iconAlt={'user'}
+  
+        />
+
+        < CustomFormField 
+          fieldType={FormFieldType.INPUT}
+          control = {form.control}
+          name=   {"email"}
+          label=  {'Email'}
+          placeHolder={'johndoe@gmail.com'}
+          iconSrc= {emailIcon}
+          iconAlt={'email'}
+  
+        />
+
+        < CustomFormField 
+          fieldType={FormFieldType.PHONE_INPUT}
+          control = {form.control}
+          name=   {"phone"}
+          label=  {'Phone number'}
+          placeHolder=    {'+254710182419'}
           iconSrc= {userIcon}
           iconAlt={'user'}
   
