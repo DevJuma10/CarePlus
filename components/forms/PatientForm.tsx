@@ -26,13 +26,17 @@ export enum FormFieldType {
 }
 
 
+
+
+
+
+
+
+
 export function PatientForm() {
 
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false)
-
-  console.log(`INITIAL VALUE OF IS LOADING IS ${isLoading} ======================================================`)
-
 
   // 1. Define your form.
   const form = useForm<z.infer<typeof UserFormValidation>>({
@@ -44,33 +48,27 @@ export function PatientForm() {
     },
   })
 
-  // 2. Define a submit handler.
-  const onSubmit = async ({name, email, phone}: z.infer<typeof UserFormValidation>) => {
-    setIsLoading(true)
-    console.log(`FINAL VALUE OF IS LOADING IS ${isLoading} ======================================================`)
+  const onSubmit = async ({email, name, phone}: z.infer<typeof UserFormValidation>) => {
+    setIsLoading(true);
 
 
     try {
-      const userData = {
-        name, 
-        email, 
-        phone
-      }
-      
-      const newUser = await createUser(userData)
-      
-      if(newUser) {
-        router.push(`/patients/${newUser.$id}/register`)
-      }
-        
-    } catch (error) {
-        console.log(error)
-    }
-    
-    setIsLoading(false)
-    console.log(`FINAL-FINAL VALUE OF IS LOADING IS ${isLoading} ======================================================`)
+      const userData = { name, email, phone };
 
-  }
+      console.log(userData)
+
+      const newUser = await createUser(userData);
+
+      if (newUser) {
+        router.push(`/patients/${newUser.$id}/register`);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+
+    setIsLoading(false);
+
+  };
 
 
   return (
@@ -84,33 +82,31 @@ export function PatientForm() {
         < CustomFormField 
           fieldType={FormFieldType.INPUT}
           control = {form.control}
-          name=   {"name"}
-          label=  {'Full Name'}
-          placeHolder=    {'John Doe'}
+          name=   "name"
+          label=  'Full Name'
+          placeHolder= 'John Doe'
           iconSrc= {userIcon}
-          iconAlt={'user'}
-  
+          iconAlt='user'
+
         />
 
         < CustomFormField 
           fieldType={FormFieldType.INPUT}
           control = {form.control}
-          name=   {"email"}
-          label=  {'Email'}
-          placeHolder={'johndoe@gmail.com'}
+          name=   "email"
+          label=  'Email'
+          placeHolder='johndoe@gmail.com'
           iconSrc= {emailIcon}
-          iconAlt={'email'}
+          iconAlt='email'
   
         />
 
         < CustomFormField 
           fieldType= {FormFieldType.PHONE_INPUT}
           control = {form.control}
-          name= {"phone"}
-          label= {'Phone number'}
+          name= "phone"
+          label= 'Phone number'
           placeHolder= "+254710 182419"
-          iconSrc= {userIcon}
-          iconAlt={'user'}
   
         />
 

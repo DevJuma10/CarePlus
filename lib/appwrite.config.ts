@@ -1,4 +1,3 @@
-// import sdk from 'node-appwrite'; --alternate
 import * as sdk from 'node-appwrite'   
 
 

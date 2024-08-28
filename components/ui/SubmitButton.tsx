@@ -1,12 +1,13 @@
-import Image from 'next/image'
+ import Image from 'next/image'
 import { Button } from "@/components/ui/button"
 import loaderIcon from '../../public/assets/icons/loader.svg'
 
-interface ButtonProps{
-    isLoading:  boolean,
-    className?:  string,
-    children:   React.ReactNode
+interface ButtonProps {
+  isLoading: boolean;
+  className?: string;
+  children: React.ReactNode;
 }
+
 
 const SubmitButton = ({ isLoading, className, children }: ButtonProps) => {
     return (
