@@ -5,11 +5,7 @@ import { users } from "../appwrite.config";
 import { parseStringify } from "../utils";
 
 
-
-
 export const createUser = async ( user: CreateUserParams) => {
-
-    console.log('ATEMPTT CREATNIIG USER')
 
     try {
 
@@ -20,9 +16,6 @@ export const createUser = async ( user: CreateUserParams) => {
             undefined,
             user.name  
         )
-
-        console.log({newUser})
-
         
         return parseStringify(newUser);
         
@@ -37,4 +30,3 @@ export const createUser = async ( user: CreateUserParams) => {
     } 
     
 }
-
