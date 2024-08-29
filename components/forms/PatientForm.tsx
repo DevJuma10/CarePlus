@@ -14,7 +14,6 @@ import { UserFormValidation } from "@/lib/validation"
 import { useRouter } from "next/navigation"
 import { createUser } from "@/lib/actions/patient.actions"
 
-
 export enum FormFieldType { 
   INPUT='input',
   TEXTAREA='textarea',
@@ -24,12 +23,6 @@ export enum FormFieldType {
   SELECT='select',
   SKELETON='skeleton'
 }
-
-
-
-
-
-
 
 
 
@@ -49,6 +42,8 @@ export function PatientForm() {
   })
 
   const onSubmit = async ({email, name, phone}: z.infer<typeof UserFormValidation>) => {
+
+
     setIsLoading(true);
 
 
@@ -62,12 +57,13 @@ export function PatientForm() {
       if (newUser) {
         router.push(`/patients/${newUser.$id}/register`);
       }
+
     } catch (error) {
       console.log(error);
     }
 
+    
     setIsLoading(false);
-
   };
 
 
