@@ -5,6 +5,8 @@ import { users } from "../appwrite.config";
 import { parseStringify } from "../utils";
 
 
+
+    // CREATE USER
 export const createUser = async ( user: CreateUserParams) => {
 
     try {
@@ -30,3 +32,15 @@ export const createUser = async ( user: CreateUserParams) => {
     } 
     
 }
+
+    // GET USER
+export const getUser = async (UserId:string) =>  {
+    try {
+        const  user = await users.get(UserId)
+        return parseStringify(user)
+
+        
+    } catch (error:any) {
+        console.log(error)
+    }
+} 
