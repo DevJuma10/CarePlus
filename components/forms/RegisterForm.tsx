@@ -13,20 +13,11 @@ import emailIcon from '../../public/assets/icons/email.svg'
 import { UserFormValidation } from "@/lib/validation"
 import { useRouter } from "next/navigation"
 import { createUser } from "@/lib/actions/patient.actions"
-
-export enum FormFieldType { 
-  INPUT='input',
-  TEXTAREA='textarea',
-  PHONE_INPUT='phoneInput',
-  CHECKBOX='checkbox',
-  DATE_PICKER='datePicker',
-  SELECT='select',
-  SKELETON='skeleton'
-}
+import { FormFieldType } from "./PatientForm"
 
 
 
-export function RegisterForm() {
+export function RegisterForm( { user } : { user: User}) {
 
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false)
@@ -69,22 +60,31 @@ export function RegisterForm() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 flex-1">
-        <section className="mb-12 space-y-4">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-12 flex-1">
+        
+        <section className="space-y-4">
           <h1 className="header">Welcome</h1>
-          <p className="text-dark-700">Schedule Your First Appointment</p>
+          <p className="text-dark-700">Let us know more about yourself.</p>
+        </section>
+
+        <section className="space-y-6">
+          <div className="mb-9 space-y-1">
+            <h2 className="sub-header">Personal Information</h2>
+          </div>
         </section>
         
         < CustomFormField 
           fieldType={FormFieldType.INPUT}
           control = {form.control}
           name=   "name"
-          label=  'Full Name'
+          label="Full Name"
           placeHolder= 'John Doe'
           iconSrc= {userIcon}
           iconAlt='user'
 
         />
+
+        <div className="flex flex-col gap-6 xl:flex-row">
 
         < CustomFormField 
           fieldType={FormFieldType.INPUT}
@@ -105,6 +105,49 @@ export function RegisterForm() {
           placeHolder= "+254710 182419"
   
         />
+        </div>
+
+        <div className="flex flex-col gap-6 xl:flex:row">
+          < CustomFormField 
+            fieldType={FormFieldType.DATE_PICKER}
+            control = {form.control}
+            name=   "birthDate"
+            label=  'Date of birth'
+            placeHolder='johndoe@gmail.com'
+            iconSrc= {emailIcon}
+            iconAlt='email'
+    
+          />
+
+          < CustomFormField 
+            fieldType= {FormFieldType.SKELETON}
+            control = {form.control}
+            name= "phone"
+            label= 'Phone number'
+            placeHolder= "+254710 182419"
+    
+          />
+        </div>
+
+        <div className="flex flex-col gap-6 xl:flex:row">
+          
+        </div>
+
+        <div className="flex flex-col gap-6 xl:flex:row">
+          
+        </div>
+
+        <div className="flex flex-col gap-6 xl:flex:row">
+          
+        </div>
+
+        <div className="flex flex-col gap-6 xl:flex:row">
+          
+        </div>
+
+        <div className="flex flex-col gap-6 xl:flex:row">
+          
+        </div>
 
         <SubmitButton isLoading={isLoading}>Get Started</SubmitButton>
       </form>
