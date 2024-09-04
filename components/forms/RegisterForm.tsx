@@ -245,18 +245,52 @@ export function RegisterForm( { user } : { user: User}) {
         < CustomFormField 
           fieldType= {FormFieldType.INPUT}
           control = {form.control}
-          name= "policyNumber"
+          name= "insurancePolicyNumber"
           label= 'Policy Number'
           placeHolder= "ex: Md-12345"
   
         />
         </div>
 
-        <div className="flex flex-col gap-6 xl:flex:row">
-          
+        <div className="flex flex-col gap-6 xl:flex-row">
+
+          < CustomFormField 
+            fieldType={FormFieldType.TEXTAREA}
+            control = {form.control}
+            name=   "allergies"
+            label=  'Allergies (if any)'
+            placeHolder="ex: Peanut, Penicillin, Pollen"
+    
+          />
+
+          < CustomFormField 
+            fieldType= {FormFieldType.TEXTAREA}
+            control = {form.control}
+            name= "currentMdication"
+            label= 'Current Medication'
+            placeHolder= "ex: ibuprofen 200mg, Levothyroxide 50mcg"
+    
+          />
         </div>
 
-        <div className="flex flex-col gap-6 xl:flex:row">
+        <div className="flex flex-col gap-6 xl:flex-row">
+
+        < CustomFormField 
+            fieldType={FormFieldType.TEXTAREA}
+            control = {form.control}
+            name=   "familyMedicalHistory"
+            label=  'Family medical history (if any)'
+            placeHolder="ex: Alopecia"
+    
+          />
+
+          < CustomFormField 
+            fieldType= {FormFieldType.TEXTAREA}
+            control = {form.control}
+            name= "pastMedicalHistory"
+            label= 'Past Medical History'
+            placeHolder= "ex: Ashma diagnosis in childhood"
+          />
           
         </div>
 
