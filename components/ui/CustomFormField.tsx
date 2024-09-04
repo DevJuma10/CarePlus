@@ -20,6 +20,7 @@ import calenderSvg from '../../public/assets/icons/calendar.svg'
 import DatePicker from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
+import { Select, SelectContent, SelectTrigger, SelectValue } from './select'
  
 interface CustomProps {
     control:Control<any>,
@@ -114,6 +115,24 @@ const RenderField = ({field, props}: {field: any; props:CustomProps}) => {
                     (field)   : null
                 )
             
+
+            case FormFieldType.SELECT:
+                return(
+                    <FormControl>
+                        <Select onValueChange={field.onChange} defaultValue={field.value}>
+                            <FormControl>
+                                <SelectTrigger className='shad-select-trigger'>
+                                    <SelectValue placeholder={props.placeHolder}/>
+                                </SelectTrigger>
+                            </FormControl>
+
+                            <SelectContent className='shad-select-content'>
+                                {props.children}
+                            </SelectContent>
+                        </Select>
+                    </FormControl>
+                )
+
             default:
                 break;
 
