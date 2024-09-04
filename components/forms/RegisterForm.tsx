@@ -150,13 +150,58 @@ export function RegisterForm( { user } : { user: User}) {
           />
         </div>
 
-        <div className="flex flex-col gap-6 xl:flex:row">
+        <div className="flex flex-col gap-6 xl:flex-row">
+
+        < CustomFormField 
+          fieldType={FormFieldType.INPUT}
+          control = {form.control}
+          name=   "address"
+          label=  'Address'
+          placeHolder='7 Floor, Chiromo Lane'
+          iconAlt='address'
+  
+        />
+
+        < CustomFormField 
+          fieldType= {FormFieldType.INPUT}
+          control = {form.control}
+          name= "occupation"
+          label= 'Occupation'
+          placeHolder= "Nurse"
+  
+        />
           
         </div>
 
-        <div className="flex flex-col gap-6 xl:flex:row">
+
+        <div className="flex flex-col gap-6 xl:flex-row">
+
+        < CustomFormField 
+          fieldType={FormFieldType.INPUT}
+          control = {form.control}
+          name=   "emergency contact"
+          label=  'Emergency contact name'
+          placeHolder="Guardian's name"
+  
+        />
+
+        < CustomFormField 
+          fieldType= {FormFieldType.PHONE_INPUT}
+          control = {form.control}
+          name= "emergency contact number"
+          label= 'Emergenct contact number'
+          placeHolder= "710182419"
+  
+        />
           
         </div>
+
+
+        <section className="space-y-6">
+          <div className="mb-9 space-y-1">
+            <h2 className="sub-header">Medical Information</h2>
+          </div>
+        </section>
 
         <div className="flex flex-col gap-6 xl:flex:row">
           
