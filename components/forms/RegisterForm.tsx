@@ -15,10 +15,11 @@ import { useRouter } from "next/navigation"
 import { createUser } from "@/lib/actions/patient.actions"
 import { FormFieldType } from "./PatientForm"
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group"
-import { Doctors, GenderOptions } from "@/constants"
+import { Doctors, GenderOptions, IdentificationTypes } from "@/constants"
 import { Label } from "../ui/label"
 import { SelectItem } from "../ui/select"
 import Image from "next/image"
+import { FileUploader } from "../ui/fileUploader"
 
 
 export function RegisterForm( { user } : { user: User}) {
@@ -71,12 +72,15 @@ export function RegisterForm( { user } : { user: User}) {
           <p className="text-dark-700">Let us know more about yourself.</p>
         </section>
 
+        {/* PERSONAL INFORMATION */}
+
         <section className="space-y-6">
           <div className="mb-9 space-y-1">
             <h2 className="sub-header">Personal Information</h2>
           </div>
         </section>
-        
+
+          {/* Name */}
         < CustomFormField 
           fieldType={FormFieldType.INPUT}
           control = {form.control}
@@ -88,6 +92,8 @@ export function RegisterForm( { user } : { user: User}) {
 
         />
 
+
+        {/* Email */}
         <div className="flex flex-col gap-6 xl:flex-row">
 
         < CustomFormField 
@@ -101,6 +107,7 @@ export function RegisterForm( { user } : { user: User}) {
   
         />
 
+          {/* Phone Number */}
         < CustomFormField 
           fieldType= {FormFieldType.PHONE_INPUT}
           control = {form.control}
@@ -111,6 +118,7 @@ export function RegisterForm( { user } : { user: User}) {
         />
         </div>
 
+        {/* Date of Birth */}
         <div className="flex flex-col gap-6 xl:flex-row">
           < CustomFormField 
             fieldType={FormFieldType.DATE_PICKER}
@@ -123,6 +131,8 @@ export function RegisterForm( { user } : { user: User}) {
     
           />
 
+
+        {/* Gender */}
           < CustomFormField 
             fieldType= {FormFieldType.SKELETON}
             control = {form.control}
@@ -147,11 +157,12 @@ export function RegisterForm( { user } : { user: User}) {
                 </RadioGroup>
               </FormControl>
             )}
-            placeHolder= "+254710 182419"
+           
     
           />
         </div>
 
+          {/* Address */}
         <div className="flex flex-col gap-6 xl:flex-row">
 
         < CustomFormField 
@@ -163,7 +174,7 @@ export function RegisterForm( { user } : { user: User}) {
           iconAlt='address'
   
         />
-
+          {/* Occupation */}
         < CustomFormField 
           fieldType= {FormFieldType.INPUT}
           control = {form.control}
@@ -175,7 +186,7 @@ export function RegisterForm( { user } : { user: User}) {
           
         </div>
 
-
+            {/* Emergency Contact Name */}
         <div className="flex flex-col gap-6 xl:flex-row">
 
         < CustomFormField 
@@ -186,7 +197,7 @@ export function RegisterForm( { user } : { user: User}) {
           placeHolder="Guardian's name"
   
         />
-
+          {/* Emergency Contact Number */}
         < CustomFormField 
           fieldType= {FormFieldType.PHONE_INPUT}
           control = {form.control}
@@ -232,6 +243,8 @@ export function RegisterForm( { user } : { user: User}) {
 
         </CustomFormField>
 
+
+          {/* Isurance Provider */}
         <div className="flex flex-col gap-6 xl:flex-row">
         < CustomFormField 
           fieldType={FormFieldType.INPUT}
@@ -242,6 +255,7 @@ export function RegisterForm( { user } : { user: User}) {
   
         />
 
+        {/* Insurance Policy Number */}
         < CustomFormField 
           fieldType= {FormFieldType.INPUT}
           control = {form.control}
@@ -252,6 +266,7 @@ export function RegisterForm( { user } : { user: User}) {
         />
         </div>
 
+          {/* Allergies */}
         <div className="flex flex-col gap-6 xl:flex-row">
 
           < CustomFormField 
@@ -263,6 +278,7 @@ export function RegisterForm( { user } : { user: User}) {
     
           />
 
+          {/* Current Medication */}
           < CustomFormField 
             fieldType= {FormFieldType.TEXTAREA}
             control = {form.control}
@@ -272,7 +288,7 @@ export function RegisterForm( { user } : { user: User}) {
     
           />
         </div>
-
+          {/* Family Medical History */}
         <div className="flex flex-col gap-6 xl:flex-row">
 
         < CustomFormField 
@@ -284,6 +300,7 @@ export function RegisterForm( { user } : { user: User}) {
     
           />
 
+          {/* Past Medical History */}
           < CustomFormField 
             fieldType= {FormFieldType.TEXTAREA}
             control = {form.control}
@@ -293,6 +310,89 @@ export function RegisterForm( { user } : { user: User}) {
           />
           
         </div>
+
+        <section className="space-y-6">
+          <div className="mb-9 space-y-1">
+            <h2 className="sub-header">Identification and Verification</h2>
+          </div>
+        </section>
+
+          {/* Identification Type */}
+        
+        < CustomFormField 
+          fieldType= {FormFieldType.SELECT}
+          control = {form.control}
+          name= "identificationType"
+          label= 'Identification Type'
+          placeHolder= "ex:Drivers Licence"
+  
+        >
+          {IdentificationTypes.map((identification) => (
+            <SelectItem key={identification} value={identification}>
+              <div className="cursor-pointer">
+              <p>{identification}</p>
+              </div>
+            </SelectItem>
+          ))}
+
+        </CustomFormField>
+
+          {/* Identification Number */}
+
+        < CustomFormField 
+          fieldType= {FormFieldType.INPUT}
+          control = {form.control}
+          name= "identificationNumber"
+          label= 'Identification Number'
+          placeHolder= "ex: 123456789"
+  
+        />
+       
+          {/* FILE UPLOAD */}
+          < CustomFormField 
+            fieldType= {FormFieldType.SKELETON}
+            control = {form.control}
+            name= "identificationDocument"
+            label= 'Scanned copy of identification document'
+            renderSkeleton= {(field) => (
+              <FormControl>
+                <FileUploader files={field.value} onChange={field.onChange}/>
+              </FormControl>
+            )}
+          
+    
+          />
+          
+
+          <section className="space-y-6">
+          <div className="mb-9 space-y-1">
+            <h2 className="sub-header">Privacy and Consent</h2>
+          </div>
+        </section>
+        
+        < CustomFormField 
+          fieldType= {FormFieldType.CHECKBOX}
+          control = {form.control}
+          name= "treatmentConsent"
+          label= 'I consent to treatment'
+          
+        />
+
+        < CustomFormField 
+          fieldType= {FormFieldType.CHECKBOX}
+          control = {form.control}
+          name= "disclosureConsent"
+          label= 'I consent to disclosure of information'
+          
+        />
+
+        < CustomFormField 
+          fieldType= {FormFieldType.CHECKBOX}
+          control = {form.control}
+          name= "privacyConsent"
+          label= 'I consent to privacy polcy'
+          
+        />
 
         <SubmitButton isLoading={isLoading}>Get Started</SubmitButton>
       </form>
