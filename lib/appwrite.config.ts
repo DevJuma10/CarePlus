@@ -1,4 +1,7 @@
-import * as sdk from 'node-appwrite'   
+import * as sdk from 'node-appwrite'
+import dotenv from 'dotenv'
+
+dotenv.config();
 
 
 
@@ -14,6 +17,7 @@ export const {
 } = process.env
 
 const client = new sdk.Client();
+
 
 client
     .setEndpoint(NEXT_PUBLIC_ENDPOINT!)
