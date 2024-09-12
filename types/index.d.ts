@@ -36,6 +36,9 @@ declare type SearchParamProps = {
     identificationNumber: string | undefined;
     identificationDocument: FormData | undefined;
     privacyConsent: boolean;
+    treatmentConsent: boolean;
+    disclosureConsent: boolean;
+    
   }
   
   declare type CreateAppointmentParams = {

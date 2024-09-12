@@ -68,7 +68,7 @@ export const PatientFormValidation = z.object({
     .refine((value) => value === true, {
       message: "You must consent to disclosure in order to proceed",
     }),
-  privacyConsent: z
+  priacyConsent: z
     .boolean()
     .default(false)
     .refine((value) => value === true, {
