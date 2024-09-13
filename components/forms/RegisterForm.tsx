@@ -7,12 +7,10 @@ import { Form, FormControl } from "@/components/ui/form"
 import CustomFormField from '../ui/CustomFormField'
 import { useState } from "react"
 import SubmitButton from "../ui/SubmitButton"
-// ASSETS IMPORTS
 import userIcon from '../../public/assets/icons/user.svg'
 import emailIcon from '../../public/assets/icons/email.svg'
 import { PatientFormValidation } from "@/lib/validation"
 import { useRouter } from "next/navigation"
-import { createUser } from "@/lib/actions/patient.actions"
 import { FormFieldType } from "./PatientForm"
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group"
 import { Label } from "../ui/label"
@@ -23,7 +21,9 @@ import { Doctors, GenderOptions, IdentificationTypes,PatientFormDefaultValues } 
 import { registerPatient } from "@/lib/actions/patient.actions"
 
 
-export function RegisterForm( { user } : { user: User}) {
+// const RegisterForm = ({ user }: { user: User}) => {
+// const RegisterForm = ({ user }: { user: User}) => {
+export function RegisterForm ( { user } : {user: User}){
 
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false)
@@ -42,7 +42,9 @@ export function RegisterForm( { user } : { user: User}) {
 
   // OnSubmit Logic
   const onSubmit = async (values: z.infer<typeof PatientFormValidation>) => {
+    
     setIsLoading(true);
+
 
     // Store file info in form data as
     let formData;
@@ -60,6 +62,13 @@ export function RegisterForm( { user } : { user: User}) {
     }
 
     try {
+
+      console.log("===============WEERE IN THE TRY CATCH BLOCK=========================")
+
+
+      console.log(user)
+
+
       const patient = {
         userId: user.$id,
         name: values.name,
@@ -81,14 +90,16 @@ export function RegisterForm( { user } : { user: User}) {
         identificationType: values.identificationType,
         identificationNumber: values.identificationNumber,
         identificationDocument: values.identificationDocument
-          ? formData
-          : undefined,
-        privacyConsent: values.priacyConsent,
+        ? formData
+        : undefined,
+        priacyConsent: values.priacyConsent,
         treatmentConsent: values.treatmentConsent,
-        disclosureConsent: values.disclosureConsent
+        disclosureConsent: values.disclosureConsent,
       };
 
+
       const newPatient = await registerPatient(patient);
+
 
       if (newPatient) {
         router.push(`/patients/${user.$id}/new-appointment`);
@@ -99,6 +110,11 @@ export function RegisterForm( { user } : { user: User}) {
 
     setIsLoading(false);
   };
+
+
+
+
+
 
 
 
@@ -117,19 +133,18 @@ export function RegisterForm( { user } : { user: User}) {
           <div className="mb-9 space-y-1">
             <h2 className="sub-header">Personal Information</h2>
           </div>
-        </section>
 
           {/* Name */}
         < CustomFormField 
           fieldType={FormFieldType.INPUT}
           control = {form.control}
-          name=   "name"
+          name="name"
           label="Full Name"
           placeHolder= 'John Doe'
           iconSrc= {userIcon}
           iconAlt='user'
-
-        />
+          
+          />
 
 
         {/* Email */}
@@ -143,8 +158,8 @@ export function RegisterForm( { user } : { user: User}) {
           placeHolder='johndoe@gmail.com'
           iconSrc= {emailIcon}
           iconAlt='email'
-  
-        />
+          
+          />
 
           {/* Phone Number */}
         < CustomFormField 
@@ -153,8 +168,8 @@ export function RegisterForm( { user } : { user: User}) {
           name= "phone"
           label= 'Phone number'
           placeHolder= "+254710 182419"
-  
-        />
+          
+          />
         </div>
 
         {/* Date of Birth */}
@@ -167,8 +182,8 @@ export function RegisterForm( { user } : { user: User}) {
             placeHolder='johndoe@gmail.com'
             iconSrc= {emailIcon}
             iconAlt='email'
-    
-          />
+            
+            />
 
 
         {/* Gender */}
@@ -185,7 +200,7 @@ export function RegisterForm( { user } : { user: User}) {
                       <RadioGroupItem   
                           value={option}
                           id={option}
-                      />
+                          />
 
                       <Label htmlFor={option}  className="cursor-pointer">
                         {option}
@@ -196,9 +211,9 @@ export function RegisterForm( { user } : { user: User}) {
                 </RadioGroup>
               </FormControl>
             )}
-           
-    
-          />
+            
+            
+            />
         </div>
 
           {/* Address */}
@@ -211,8 +226,8 @@ export function RegisterForm( { user } : { user: User}) {
           label=  'Address'
           placeHolder='7 Floor, Chiromo Lane'
           iconAlt='address'
-  
-        />
+          
+          />
           {/* Occupation */}
         < CustomFormField 
           fieldType= {FormFieldType.INPUT}
@@ -220,8 +235,8 @@ export function RegisterForm( { user } : { user: User}) {
           name= "occupation"
           label= 'Occupation'
           placeHolder= "Nurse"
-  
-        />
+          
+          />
           
         </div>
 
@@ -234,8 +249,8 @@ export function RegisterForm( { user } : { user: User}) {
           name=   "emergencyContactName"
           label=  'Emergency contact name'
           placeHolder="Guardian's name"
-  
-        />
+          
+          />
           {/* Emergency Contact Number */}
         < CustomFormField 
           fieldType= {FormFieldType.PHONE_INPUT}
@@ -243,28 +258,28 @@ export function RegisterForm( { user } : { user: User}) {
           name= "emergencyContactNumber"
           label= 'Emergenct contact number'
           placeHolder= "710182419"
-  
-        />
+          
+          />
           
         </div>
 
+      </section>
 
         <section className="space-y-6">
           <div className="mb-9 space-y-1">
             <h2 className="sub-header">Medical Information</h2>
           </div>
-        </section>
         
 
             {/* Primary Physician */}
         < CustomFormField 
           fieldType= {FormFieldType.SELECT}
           control = {form.control}
-          name= "priaryPhysician"
+          name= "primaryPhysician"
           label= 'Primary Physician'
           placeHolder= "Select a physician"
-  
-        >
+          
+          >
           {Doctors.map((doctor,i) => (
             <SelectItem key={doctor.name +1 } value={doctor.name}>
               <div className="flex cursor-pointer items-center gap-2">
@@ -274,7 +289,7 @@ export function RegisterForm( { user } : { user: User}) {
                   height={32}
                   alt={doctor.name}
                   className="rounded-full border border-dark-500"
-                />
+                  />
                 <p>{doctor.name}</p>
               </div>
             </SelectItem>
@@ -288,11 +303,11 @@ export function RegisterForm( { user } : { user: User}) {
         < CustomFormField 
           fieldType={FormFieldType.INPUT}
           control = {form.control}
-          name=   "isuranceProvider"
+          name=   "insuranceProvider"
           label=  'Insurance Provider'
           placeHolder="ex: Madison"
-  
-        />
+          
+          />
 
         {/* Insurance Policy Number */}
         < CustomFormField 
@@ -314,18 +329,18 @@ export function RegisterForm( { user } : { user: User}) {
             name=   "allergies"
             label=  'Allergies (if any)'
             placeHolder="ex: Peanut, Penicillin, Pollen"
-    
-          />
+            
+            />
 
           {/* Current Medication */}
           < CustomFormField 
             fieldType= {FormFieldType.TEXTAREA}
             control = {form.control}
-            name= "currentMdication"
+            name= "currentMedication"
             label= 'Current Medication'
             placeHolder= "ex: ibuprofen 200mg, Levothyroxide 50mcg"
-    
-          />
+            
+            />
         </div>
           {/* Family Medical History */}
         <div className="flex flex-col gap-6 xl:flex-row">
@@ -336,8 +351,8 @@ export function RegisterForm( { user } : { user: User}) {
             name=   "familyMedicalHistory"
             label=  'Family medical history (if any)'
             placeHolder="ex: Alopecia"
-    
-          />
+            
+            />
 
           {/* Past Medical History */}
           < CustomFormField 
@@ -346,15 +361,15 @@ export function RegisterForm( { user } : { user: User}) {
             name= "pastMedicalHistory"
             label= 'Past Medical History'
             placeHolder= "ex: Ashma diagnosis in childhood"
-          />
+            />
           
         </div>
+      </section>
 
         <section className="space-y-6">
           <div className="mb-9 space-y-1">
             <h2 className="sub-header">Identification and Verification</h2>
           </div>
-        </section>
 
           {/* Identification Type */}
         
@@ -364,8 +379,8 @@ export function RegisterForm( { user } : { user: User}) {
           name= "identificationType"
           label= 'Identification Type'
           placeHolder= "ex:Drivers Licence"
-  
-        >
+          
+          >
           {IdentificationTypes.map((identification) => (
             <SelectItem key={identification} value={identification}>
               <div className="cursor-pointer">
@@ -385,7 +400,7 @@ export function RegisterForm( { user } : { user: User}) {
           label= 'Identification Number'
           placeHolder= "ex: 123456789"
   
-        />
+          />
        
           {/* FILE UPLOAD */}
           < CustomFormField 
@@ -398,10 +413,11 @@ export function RegisterForm( { user } : { user: User}) {
                 <FileUploader files={field.value} onChange={field.onChange}/>
               </FormControl>
             )}
+            
+            
+            />
           
-    
-          />
-          
+      </section>
 
         <section className="space-y-6">
           <div className="mb-9 space-y-1">
@@ -432,11 +448,10 @@ export function RegisterForm( { user } : { user: User}) {
           />
         </section>
 
-        
-        
-        
         <SubmitButton isLoading={isLoading}>Get Started</SubmitButton>
+
       </form>
     </Form>
-  )
-}
+  );
+
+};

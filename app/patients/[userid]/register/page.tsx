@@ -4,12 +4,16 @@ import Link from 'next/link'
 import logo from '../../../../public/assets/icons/logo-full.svg'
 import onboardingImage from '../../../../public/assets/images/register-img.png'
 import { RegisterForm } from '@/components/forms/RegisterForm'
-import { getUser } from '@/lib/actions/patient.actions'
+import { getPatient, getUser } from '@/lib/actions/patient.actions'
 
 const Register = async ({params : { userId }} : SearchParamProps) => {
 
+
+    
   const user = await getUser( userId )
 
+  console.log(user)
+  
 
   return (
     <div className="flex h-screen max-h-screen">
@@ -34,7 +38,6 @@ const Register = async ({params : { userId }} : SearchParamProps) => {
           &copy; 2024 CarePlus
           </p>
 
-          <Link href='/?admin=true' className="text-green-500">Admin</Link>
         </div>
 
       </div>

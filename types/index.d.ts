@@ -35,7 +35,7 @@ declare type SearchParamProps = {
     identificationType: string | undefined;
     identificationNumber: string | undefined;
     identificationDocument: FormData | undefined;
-    privacyConsent: boolean;
+    priacyConsent: boolean;
     treatmentConsent: boolean;
     disclosureConsent: boolean;
     
