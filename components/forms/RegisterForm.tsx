@@ -339,9 +339,10 @@ export function RegisterForm ( { user } : {user: User}){
             />
         </div>
           {/* Family Medical History */}
+        
         <div className="flex flex-col gap-6 xl:flex-row">
 
-        < CustomFormField 
+          < CustomFormField 
             fieldType={FormFieldType.TEXTAREA}
             control = {form.control}
             name=   "familyMedicalHistory"
