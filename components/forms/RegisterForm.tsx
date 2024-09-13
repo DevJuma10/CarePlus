@@ -21,9 +21,10 @@ import { Doctors, GenderOptions, IdentificationTypes,PatientFormDefaultValues } 
 import { registerPatient } from "@/lib/actions/patient.actions"
 
 
-// const RegisterForm = ({ user }: { user: User}) => {
-// const RegisterForm = ({ user }: { user: User}) => {
 export function RegisterForm ( { user } : {user: User}){
+
+
+  console.log(user)
 
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false)
@@ -66,10 +67,8 @@ export function RegisterForm ( { user } : {user: User}){
       console.log("===============WEERE IN THE TRY CATCH BLOCK=========================")
 
 
-      console.log(user)
 
-
-      const patient = {
+      const  patient = {
         userId: user.$id,
         name: values.name,
         email: values.email,
