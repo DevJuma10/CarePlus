@@ -50,7 +50,6 @@ export function PatientForm() {
     try {
       const userData = { name, email, phone };
 
-      console.log(userData)
 
       const newUser = await createUser(userData);
 

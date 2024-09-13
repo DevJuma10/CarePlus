@@ -1,20 +1,18 @@
-"use client"
 
 import React from 'react'
 import Image from 'next/image'
-import Link from 'next/link'
 import logo from '../../../../public/assets/icons/logo-full.svg'
 import onboardingImage from '../../../../public/assets/images/register-img.png'
 import { RegisterForm } from '@/components/forms/RegisterForm'
 import { getPatient, getUser } from '@/lib/actions/patient.actions'
 
-const Register = async ({params : { userId }} : SearchParamProps) => {
 
+
+const Register = async ({params: { userId }}: SearchParamProps) => {
 
     
   const user = await getUser( userId )
 
-  console.log(user)
   
 
   return (

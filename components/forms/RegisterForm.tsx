@@ -23,9 +23,6 @@ import { registerPatient } from "@/lib/actions/patient.actions"
 
 export function RegisterForm ( { user } : {user: User}){
 
-
-  console.log(user)
-
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false)
 
