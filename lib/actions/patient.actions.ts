@@ -55,7 +55,6 @@ export const registerPatient = async ({
     ...patient
   }: RegisterUserParams) => {
     try {
-        console.log('=============creating document==========================')
       // Upload file ->  // https://appwrite.io/docs/references/cloud/client-web/storage#createFile
       let file;
       if (identificationDocument) {
