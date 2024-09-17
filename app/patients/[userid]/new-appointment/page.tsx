@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import logo from '../../../../public/assets/icons/logo-full.svg'
 import appointmentImage from '../../../../public/assets/images/appointment-img.png'
-import { AppointmentFrom } from '@/components/forms/Appointment';
+import { AppointmentFrom } from '@/components/forms/AppointmentForm';
 import { getPatient } from '@/lib/actions/patient.actions';
 
 export default async function NewAppointment({ params : { userId}} : SearchParamProps) {
