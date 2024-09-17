@@ -31,6 +31,8 @@ export function AppointmentFrom( { userId, patientId, type, appointment, setOpen
 
 }) {
 
+  console.log(appointment)
+
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false)
 
@@ -39,13 +41,15 @@ export function AppointmentFrom( { userId, patientId, type, appointment, setOpen
   const form = useForm<z.infer<typeof AppointmentFormValidation>>({
     resolver: zodResolver(AppointmentFormValidation),
     defaultValues: {
-      primaryPhysician: "",
-      schedule: new Date(),
-      reason:"",
-      note:"",
-      cancellationReason:""
+      primaryPhysician: appointment ? appointment.primaryPhysician : '',
+      schedule: appointment ? new Date(appointment.schedule) : new Date (),
+      reason: appointment ? appointment.reason : '',
+      note: appointment ? appointment.note : '',
+      cancellationReason: appointment.cancellationReason || ''
     },
   })
+
+
 
   const onSubmit = async (values: z.infer<typeof AppointmentFormValidation>) => {
 
@@ -56,7 +60,7 @@ export function AppointmentFrom( { userId, patientId, type, appointment, setOpen
 
     switch (type) {
         case "cancel":
-            status='canceled'
+            status='cancelled'
             break;
 
         case "schedule":
@@ -159,7 +163,7 @@ export function AppointmentFrom( { userId, patientId, type, appointment, setOpen
                     control = {form.control}
                     name= "primaryPhysician"
                     label= 'Doctor'
-                    placeHolder= "Select a doctor"
+                    placeHolder= "Select a doctor" 
                     iconSrc={searchIcon}
                     iconAlt="search"
                     
